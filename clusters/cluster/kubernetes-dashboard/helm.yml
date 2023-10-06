@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: my-release
+  namespace: kubernetes-dashboard
+spec:
+  chart:
+    spec:
+      chart: kubernetes-dashboard
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: kubernetes-dashboard
+  interval: 1m0s
+  releaseName: kubernetes-dashboard
+  values:
+    cert-manager:
+      enabled: false
+    nginx:
+      enabled: false
