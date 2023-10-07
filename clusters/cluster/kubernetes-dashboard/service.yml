@@ -1,16 +1,18 @@
 kind: Service
 apiVersion: v1
 metadata:
-  labels:
-    k8s-app: kubernetes-dashboard
   name: kubernetes-dashboard-https
   namespace: kubernetes-dashboard
 spec:
+  allocateLoadBalancerNodePorts: false
   ports:
-    - port: 443
-      targetPort: 8443
+    - name: https
+      port: 443
+      targetPort: https
   selector:
-    k8s-app: kubernetes-dashboard
+    app.kubernetes.io/component: kubernetes-dashboard
+    app.kubernetes.io/instance: kubernetes-dashboard
+    app.kubernetes.io/name: kubernetes-dashboard
   type: LoadBalancer
   loadBalancerIP: 192.168.10.56
 
